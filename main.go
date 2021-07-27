@@ -1,7 +1,7 @@
 package main
 
 import (
-	"log"
+	// "log"
 	"net/http"
 	"os"
 
@@ -13,13 +13,14 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		log.Fatal("$PORT must be set")
+		//log.Fatal("$PORT must be set")
+		port = "9900"
 	}
 
 	router := gin.New()
 	router.Use(gin.Logger())
 	router.LoadHTMLGlob("templates/*.tmpl.html")
-	router.Static("/static", "static")
+	router.Static("/pdf", "static/pdf")
 
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.tmpl.html", nil)
